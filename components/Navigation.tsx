@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 const menuItems = [
   { label: 'Mission', href: '/mission' },
+  { label: 'Fleet', href: '/fleet' },
   { label: 'Territory', href: '/territory' },
   { label: 'Members', href: '/members' },
 ]
