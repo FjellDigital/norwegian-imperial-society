@@ -7,6 +7,7 @@ interface System {
   url: string | null
   type: string
   influence: string | null
+  influenceDelta: number | null
   state: string
   controlling: boolean
   power: string | null
@@ -130,7 +131,14 @@ export default function SystemsSection() {
                         : <span className="text-gray-500">Present</span>}
                     </td>
                     <td className="px-6 py-4 text-gray-300">{system.state}</td>
-                    <td className="px-6 py-4 text-gray-400">{system.influence ?? '—'}</td>
+                    <td className="px-6 py-4">
+                      <span className="text-gray-400">{system.influence ?? '—'}</span>
+                      {system.influenceDelta !== null && system.influenceDelta !== 0 && (
+                        <span className={`ml-2 text-xs font-semibold ${system.influenceDelta > 0 ? 'text-green-400' : 'text-red-400'}`}>
+                          {system.influenceDelta > 0 ? '↑' : '↓'}{Math.abs(system.influenceDelta).toFixed(2)}%
+                        </span>
+                      )}
+                    </td>
                     <td className="px-6 py-4">
                       {system.power
                         ? <span className="text-gray-300">{system.power} <span className="text-gray-500 text-sm">({system.powerState})</span></span>

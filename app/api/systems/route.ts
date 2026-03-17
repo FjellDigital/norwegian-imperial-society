@@ -36,6 +36,7 @@ const MONITORED_SYSTEMS = [
 interface EDSMFaction {
   name: string
   influence: number
+  influenceHistory?: Record<string, number>
   activeStates: { state: string }[]
 }
 
@@ -55,7 +56,7 @@ async function fetchSystem(systemName: string) {
   const encoded = encodeURIComponent(systemName)
 
   const [edsmRes, spanshRes] = await Promise.all([
-    fetch(`https://www.edsm.net/api-system-v1/factions?systemName=${encoded}`, {
+    fetch(`https://www.edsm.net/api-system-v1/factions?systemName=${encoded}&showHistory=1`, {
       next: { revalidate: 300 },
     }),
     fetch('https://spansh.co.uk/api/systems/search', {
@@ -88,11 +89,23 @@ async function fetchSystem(systemName: string) {
     powerState = s.power_state ?? null
   }
 
+  // Calculate influence delta from last two history entries
+  let influenceDelta: number | null = null
+  if (faction.influenceHistory) {
+    const entries = Object.entries(faction.influenceHistory)
+      .map(([ts, val]) => ({ ts: parseInt(ts), val }))
+      .sort((a, b) => a.ts - b.ts)
+    if (entries.length >= 2) {
+      influenceDelta = (entries[entries.length - 1].val - entries[entries.length - 2].val) * 100
+    }
+  }
+
   return {
     name: edsm.name,
     url: edsm.url ?? null,
     type: SYSTEM_TYPES[edsm.name] ?? 'Outpost',
     influence: `${(faction.influence * 100).toFixed(1)}%`,
+    influenceDelta: influenceDelta !== null ? parseFloat(influenceDelta.toFixed(2)) : null,
     state: faction.activeStates?.length > 0
       ? faction.activeStates.map((s) => s.state).join(', ')
       : 'None',
