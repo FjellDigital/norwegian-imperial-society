@@ -31,9 +31,9 @@ function sortSystems(systems: System[], key: SortKey, dir: SortDir): System[] {
 
     // Sort influence numerically
     if (key === 'influence') {
-      av = parseFloat(String(av)) || 0
-      bv = parseFloat(String(bv)) || 0
-      return dir === 'asc' ? (av as number) - (bv as number) : (bv as number) - (av as number)
+      const an = parseFloat(String(av)) || 0
+      const bn = parseFloat(String(bv)) || 0
+      return dir === 'asc' ? an - bn : bn - an
     }
 
     // Sort booleans
