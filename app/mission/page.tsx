@@ -13,58 +13,58 @@ export default function MissionPage() {
       <div className="relative z-10 pt-[73px]">
         <Navigation />
 
-        <section className="py-20 px-4">
+        <section className="py-10 px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold text-amber-400 mb-12 text-center">Current Mission</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-amber-400 mb-8 text-center">Current Mission</h2>
 
             {/* Mission Card */}
-            <div className="border border-amber-700/40 rounded-lg bg-black/60 overflow-hidden shadow-lg shadow-amber-900/20">
+            <div className="border border-amber-700/40 rounded-lg bg-black/60 shadow-lg shadow-amber-900/20">
 
-              <div className="p-8 space-y-8">
+              <div className="p-5 md:p-8 space-y-6">
 
                 {/* Title + Location */}
                 <div>
                   <p className="text-amber-600 text-xs uppercase tracking-widest mb-1">Active Mission</p>
-                  <h3 className="text-2xl font-bold text-amber-300 mb-3">{mission.title}</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-amber-300 mb-3">{mission.title}</h3>
                   <div className="flex gap-6">
                     <div>
                       <p className="text-amber-400 text-xs uppercase tracking-widest mb-1">System</p>
                       {mission.location.systemUrl
-                        ? <a href={mission.location.systemUrl} target="_blank" rel="noopener noreferrer" className="text-gray-300 font-semibold hover:text-amber-400 transition-colors">{mission.location.system}</a>
-                        : <p className="text-gray-300 font-semibold">{mission.location.system}</p>}
+                        ? <a href={mission.location.systemUrl} target="_blank" rel="noopener noreferrer" className="text-gray-300 font-semibold hover:text-amber-400 transition-colors text-sm md:text-base">{mission.location.system}</a>
+                        : <p className="text-gray-300 font-semibold text-sm md:text-base">{mission.location.system}</p>}
                     </div>
                     <div>
                       <p className="text-amber-400 text-xs uppercase tracking-widest mb-1">Starport</p>
                       {mission.location.starportUrl
-                        ? <a href={mission.location.starportUrl} target="_blank" rel="noopener noreferrer" className="text-gray-300 font-semibold hover:text-amber-400 transition-colors">{mission.location.starport}</a>
-                        : <p className="text-gray-300 font-semibold">{mission.location.starport}</p>}
+                        ? <a href={mission.location.starportUrl} target="_blank" rel="noopener noreferrer" className="text-gray-300 font-semibold hover:text-amber-400 transition-colors text-sm md:text-base">{mission.location.starport}</a>
+                        : <p className="text-gray-300 font-semibold text-sm md:text-base">{mission.location.starport}</p>}
                     </div>
                   </div>
                 </div>
 
-                {/* Image + Objectives */}
-                <div className="flex gap-6 items-start">
+                {/* Image + Objectives — stacked on mobile, side by side on md+ */}
+                <div className="flex flex-col md:flex-row gap-4 items-start">
                   <img
                     src={mission.image}
                     alt="Mission"
-                    className="w-40 h-40 object-cover rounded-lg border border-amber-700/30 flex-shrink-0"
+                    className="w-full md:w-40 md:h-40 h-48 object-cover rounded-lg border border-amber-700/30 flex-shrink-0"
                   />
-                  <div className="flex-1 space-y-4">
+                  <div className="flex-1 space-y-3 w-full">
                     <div className="p-4 border border-amber-700/30 rounded-lg bg-amber-900/10">
                       <p className="text-amber-400 text-xs uppercase tracking-widest mb-2">Primary Objective</p>
-                      <p className="text-gray-300">{mission.primary}</p>
+                      <p className="text-gray-300 text-sm md:text-base">{mission.primary}</p>
                     </div>
                     <div className="p-4 border border-amber-700/20 rounded-lg bg-black/40">
                       <p className="text-amber-400/70 text-xs uppercase tracking-widest mb-2">Secondary Objective</p>
-                      <p className="text-gray-400">{mission.secondary}</p>
+                      <p className="text-gray-400 text-sm md:text-base">{mission.secondary}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Ways to Contribute */}
                 <div>
-                  <p className="text-amber-400 text-xs uppercase tracking-widest mb-4">Ways to Contribute</p>
-                  <div className="grid sm:grid-cols-2 gap-3">
+                  <p className="text-amber-400 text-xs uppercase tracking-widest mb-3">Ways to Contribute</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {mission.contributions.map((c) => (
                       <div key={c.label} className="flex items-start gap-3 p-3 border border-amber-700/20 rounded-lg bg-black/30">
                         <span className="text-amber-500 mt-0.5">▸</span>
@@ -76,7 +76,6 @@ export default function MissionPage() {
                     ))}
                   </div>
                 </div>
-
 
               </div>
             </div>
