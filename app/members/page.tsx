@@ -71,7 +71,7 @@ export default function MembersPage() {
         <div className="absolute inset-0 stars-background"></div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 pt-[73px]">
         <Navigation />
 
         <section className="py-20 px-4">

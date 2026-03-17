@@ -18,7 +18,7 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 pt-[73px]">
         <Navigation />
         <HeroSection />
         <CoreValuesSection />

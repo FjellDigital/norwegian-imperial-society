@@ -14,7 +14,7 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="border-b border-amber-700/30 bg-black/50 backdrop-blur-sm sticky top-0 z-50">
+    <nav className="border-b border-amber-700/30 bg-black/50 backdrop-blur-sm fixed top-0 left-0 right-0 z-50">
       <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" onClick={() => setIsOpen(false)}>
           <div className="cursor-pointer hover:opacity-80 transition-opacity">
